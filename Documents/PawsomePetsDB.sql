@@ -42,4 +42,4 @@ constraint foreign key(petID) references pet(petID));
 
 insert into user
 values(1,"admin","adminPass","ADMIN","Steve","Irwin","SteveIrwin@email.com","32153432"),
-(1,"user","userPass","USER","Margot","Robbie","MargotRobbie@email.com","783526423");
+(2,"user","userPass","USER","Margot","Robbie","MargotRobbie@email.com","783526423");
