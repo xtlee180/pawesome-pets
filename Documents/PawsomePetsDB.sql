@@ -16,8 +16,8 @@ petImage varchar(250));
 
 create table user(
 userID int primary key auto_increment ,
-userName varchar(20) not null,
-password varchar(30) not null,
+userName varchar(20) not null unique,
+userPassword varchar(30) not null,
 userType varchar(15) not null,
 firstName varchar(20) not null,
 lastName varchar(20) not null,
