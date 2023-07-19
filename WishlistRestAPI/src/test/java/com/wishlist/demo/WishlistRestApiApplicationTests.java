@@ -1,10 +1,10 @@
-package com.wish.demo;
+package com.wishlist.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WishListRestApiApplicationTests {
+class WishlistRestApiApplicationTests {
 
 	@Test
 	void contextLoads() {

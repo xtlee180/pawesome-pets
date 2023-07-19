@@ -1,13 +1,13 @@
-package com.wish.demo;
+package com.wishlist.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WishListRestApiApplication {
+public class WishlistRestApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WishListRestApiApplication.class, args);
+		SpringApplication.run(WishlistRestApiApplication.class, args);
 	}
 
 }
