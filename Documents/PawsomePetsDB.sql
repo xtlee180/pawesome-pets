@@ -54,9 +54,11 @@ CREATE TABLE wishlists (
 
 CREATE TABLE wishlist_pets (
   wishListID int NOT NULL,
-  petID int NOT NULL,
+  petID BIGINT NOT NULL,
   PRIMARY KEY (wishListID, petID),
   FOREIGN KEY (wishListID) REFERENCES wishlists (wishListID));
+  
+  
 
 
 
