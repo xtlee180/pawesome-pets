@@ -50,13 +50,12 @@ use pawsomeWish;
 CREATE TABLE wishlists (
   wishListID int PRIMARY KEY AUTO_INCREMENT,
   listName VARCHAR(255) NOT NULL,
-  userID int NOT NULL
-);
+  userID int NOT NULL);
 
 CREATE TABLE wishlist_pets (
   wishListID int NOT NULL,
-  petID BIGINT NOT NULL,
-  PRIMARY KEY (wishListID, pet_id),
+  petID int NOT NULL,
+  PRIMARY KEY (wishListID, petID),
   FOREIGN KEY (wishListID) REFERENCES wishlists (wishListID));
 
 
