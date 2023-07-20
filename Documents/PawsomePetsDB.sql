@@ -47,16 +47,18 @@ drop database if exists pawsomeWish;
 create database pawsomeWish;
 use pawsomeWish;
 
-CREATE TABLE wishlists (
-  wishListID int PRIMARY KEY AUTO_INCREMENT,
-  listName VARCHAR(255) NOT NULL,
-  userID int NOT NULL);
 
-CREATE TABLE wishlist_pets (
-  wishListID int NOT NULL,
-  petID BIGINT NOT NULL,
-  PRIMARY KEY (wishListID, petID),
-  FOREIGN KEY (wishListID) REFERENCES wishlists (wishListID));
+create table wishlist (
+  wishlistID int primary key auto_increment,
+  wishlistName varchar(255) not null,
+  userID int not null);
+
+
+create table wishlist_pets (
+  wishlistID int not null,
+  petID int not null,
+  primary key (wishlistID, petID),
+ foreign key (wishlistID) references wishlist (wishlistID));
   
   
 
