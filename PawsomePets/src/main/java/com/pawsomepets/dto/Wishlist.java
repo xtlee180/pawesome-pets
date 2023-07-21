@@ -4,8 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,7 +15,16 @@ import javax.persistence.Id;
 public class Wishlist {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int wishlistID;
+    @Column(nullable = false)
+    private String wishlistName;
+    @Column(nullable = false)
     private int userID;
-    private int petID;
+
+    @ElementCollection
+    @CollectionTable(name = "wishlist_pets", joinColumns = @JoinColumn(name = "wishlistID"))
+    @Column(name = "petID")
+    private List<Integer> petIDs = new ArrayList<>();
+
 }

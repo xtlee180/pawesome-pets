@@ -1,20 +1,26 @@
 package com.pawsomepets.dao;
 
-import com.pawsomepets.service.dto.Wishlist;
+import com.pawsomepets.dto.Wishlist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
-
-@Transactional
+import java.util.List;
+//@Transactional
 @Repository
 public interface WishlistDao extends JpaRepository<Wishlist, Integer> {
     @Modifying
-    @Query(value = "INSERT INTO wishlist VALUES(?,?,?)",nativeQuery = true)
-    int insertWishlist(int wishlistID, int userID, int petID);
+    @Query(value = "INSERT INTO wishlist(wishlistName, userID) VALUES(?,?,?)",nativeQuery = true)
+    int insertWishlist(String wishlistName, int userID);
+
     @Modifying
-    @Query("UPDATE Wishlist SET userID = :userID, petID = :petID where wishlistID = :wishlistID" )
-    int updateWishlist(@Param("wishlistID") int wishlistID, @Param("userID") int userID, @Param("petID") int petID);
+    @Query("UPDATE Wishlist SET wishlistName = :wishlistName, userID = :userID where wishlistID = :wishlistID" )
+    int updateWishlist(@Param("wishlistID") int wishlistID, @Param("wishlistName") String wishlistName, @Param("userID") int userID);
+
+    @Query("FROM Wishlist WHERE userID = :userID")
+    List<Wishlist> findByUserID(@Param("userID") int userID);
+
 }
+
