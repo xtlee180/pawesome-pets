@@ -79,6 +79,10 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 	
+	@Override
+	public User getUserByUserName(String userName) {
+		return userDao.getbyUserName(userName);
+	}
 	
 
 }

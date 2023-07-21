@@ -15,6 +15,7 @@ public interface UserService {
 	public String deleteUser(int userID);
 	public User editNameAndPass(int userID, String userName, String password);
 	public User editUserType(int userID ,String userType);
+	public User getUserByUserName(String userName);
 	
 
 }
