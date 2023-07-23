@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+
+
+:root {
+    --coral: #EE896D;
+    --green: #BAD36D;
+    --nude: #E8CC95;
+    --black: #141414;
+    --blue: #C3E7DC;
+    --white: #FFFFFF;
+    --primary: #F9F3DD;
+}
+
+
+body {
+    background-color: var(--primary);
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Lato', sans-serif;
+}
+
+
+
+.top-container {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: var(--primary);
+    height: 120px;
+}
+
+/* Add CSS for the bottom container to stay at the bottom */
+/* .bottom-container {
+    position: sticky;
+    bottom: 0;
+    z-index: 999;
+
+} */
+
+/* Add CSS for the middle container to flex vertically and stay in the middle */
+.main-container {
+    margin-top: 70px;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    /* width: auto; */
+    /* justify-content: center; */
+    min-height: 80vh;
+    padding-left: 45px;
+    /* This ensures the container takes at least the full viewport height */
+}
+
+.logo-container {
+    display: flex;
+    margin-top: 1px;
+    color: var(--coral);
+    text-align: center;
+    padding: 10px;
+    font-family: Caveat;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.nav-container.active {
+    border-bottom: solid;
+    color: var(--coral);
+}
+
+
+.nav-container {
+    margin: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    /* padding: 10px; */
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 750;
+
+    /* line-height: normal; */
+    /* text-decoration-line: underline; */
+}
+
+.login-container {
+    text-align: center;
+    padding: 10px;
+}
+
+
+a {
+    margin: 10px;
+    color: var(--black);
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 750;
+    text-decoration: none;
+}
+
+.main-text {
+    margin-top: 30px;
+    color: #BAD36D;
+    font-family: Lato;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    width: 558px;
+    height: 351px;
+    margin-left: 50px;
+}
+
+.card {
+    /* border-color: var(--black); */
+    border-radius: 25px;
+    width: 254px;
+    height: 352px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    /* margin-right: 5px; */
+
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    /* opacity: 0.9;
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease; */
+
+    /* background: linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.25) 100%), url(<path-to-image>), lightgray 50% / cover no-repeat; */
+    /* filter: blur(2.5px); */
+}
+
+.mainimg {
+    width: 536px;
+    height: 417px;
+    border-radius: 25px;
+    margin-left: 5px;
+    /* border: solid var(--nude); */
+}
+
+.box {
+    position: absolute;
+    top: 225px;
+    /* Adjust this value to position the box diagonally */
+    margin-left: 40px;
+    /* Adjust this value to position the box diagonally */
+    width: 526px;
+    height: 402px;
+    border-radius: 25px;
+    background-color: var(--nude);
+    z-index: -1;
+}
+
+
+.adopt-now-button {
+    margin-left: 50px;
+    width: 165px;
+    height: 42px;
+    border-radius: 25px;
+    border: solid var(--coral);
+    background: var(--coral);
+    color: var(--primary);
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+
+.paw1 {
+    width: 61px;
+    height: 65px;
+    transform: rotate(-36.308deg);
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.paw2 {
+    width: 27.112px;
+    height: 30.288px;
+    transform: rotate(35.213deg);
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+.profile {
+    width: 60px;
+    height: 60px;
+    background-color: var(--coral);
+    border-radius: 50%;
+    border: solid var(--coral) 3px;
+    /* margin-top: 5px; */
+    padding-top: 8px;
+    margin-left: 50px;
+    margin-top: 5px;
+}
+
+.profile img {
+    width: 40px;
+    height: 40px;
+}
+
+.card img {
+    /* border-top-left-radius: 25px;
+    border-top-right-radius: 25px; */
+    width: 254px;
+    height: 352px;
+    border-radius: 25px;
+    object-fit: cover;
+    /* width: 100%;
+    height: auto; */
+}
+
+.image-wrapper:hover {
+    filter: blur(2.5px);
+}
+
+#carousel {
+    margin-top: 60px;
+    margin-bottom: 50px;
+    /* padding-top: 20px; */
+}
+
+.carousel-inner {
+    padding-left: 50px;
+}
+
+/* Custom styles for carousel controls */
+.carousel-control-prev,
+.carousel-control-next {
+    color: var(--coral);
+    /* Set the color to your desired dark color (e.g., black) */
+    /* background-color: #f0f0f0; */
+    /* opacity: 1; */
+    width: 65px;
+    bottom: 45px;
+    border-radius: 50%;
+}
+
+/* Change the color and opacity when hovering over the buttons */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    color: #fff;
+    /* Set the color to your desired color for the hover state */
+    /* background-color: #333; */
+    /* Set the background color for the hover state */
+    /* opacity: 1; */
+    /* Set the opacity to 100% for the hover state */
+}
+
+/* Change the color of the carousel arrows themselves */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    /* filter: invert(1); */
+    /* Invert the color of the arrow icons (black to white) */
+}

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="home.css">
+    <title>Pawesome Pets Home</title>
+</head>
+
+<body>
+
+    <div class="top-container">
+        <div class="container-fluid">
+            <div class="row py-3">
+                <div class="col-md-4 col-12 text-center">
+                    <div class="logo-container">
+                        <img class="paw1" src="./images/paw.png" alt="paw">
+                        <p>Pawsome Pets</p>
+                        <img class="paw2" src="./images/paw.png" alt="paw">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-12 text-center">
+                    <div class="nav-container">
+                        <a href="" class="active mx-3">Home</a>
+                        <a href="" class="mx-3">Adopt a Pet</a>
+                        <a href="" class="mx-3">About Us</a>
+                        <a href="" class="mx-3">Contact Us</a>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-12 text-left">
+                    <div class="login-container">
+                        <div class="profile">
+                            <img src="./images/defaultprofile.png" alt="profile pic">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main-container">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <div class="main-text">
+                        <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
+                            velit...</p>
+                    </div>
+                    <button class="adopt-now-button" type="button">Adopt Now</button>
+                </div>
+                <div class="col-6 ">
+                    <div class="main-img">
+                        <img class="mainimg" src="./images/cat+dog.png" alt="cat and dog">
+                        <div class="box">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bottom-container">
+        <div class="row">
+            <h2>Animals Available for Adoption</h2>
+        </div>
+
+        <!-- Carousel -->
+        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+
+            <!-- Indicators/dots -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"></button>
+            </div>
+
+            <!-- The slideshow/carousel -->
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <!-- Card Content -->
+                                    <div class="image-wrapper">
+                                        <img src="./images/animal1.png" alt="Chicago" class="d-block w-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <!-- Card Content -->
+                                    <div class="image-wrapper">
+                                        <img src="./images/animal2.png" alt="Chicago" class="d-block w-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <!-- Card Content -->
+                                    <div class="image-wrapper">
+                                        <img src="./images/animal3.png" alt="Chicago" class="d-block w-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <!-- Card Content -->
+                                    <div class="image-wrapper">
+                                        <img src="./images/animal4.png" alt="Chicago" class="d-block w-100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="carousel-item" data-bs-interval="5000">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <!-- Card Content -->
+                                    <div class="image-wrapper">
+                                        <img src="./images/animal5.png" alt="Chicago" class="d-block w-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <!-- Card Content -->
+                                    <div class="image-wrapper">
+                                        <img src="./images/animal6.png" alt="Chicago" class="d-block w-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <!-- Card Content -->
+                                    <div class="image-wrapper">
+                                        <img src="./images/animal7.png" alt="Chicago" class="d-block w-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <!-- Card Content -->
+                                    <div class="image-wrapper">
+                                        <img src="./images/animal1.png" alt="Chicago" class="d-block w-100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="carousel-item" data-bs-interval="5000">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <!-- Card Content -->
+                                    <div class="image-wrapper">
+                                        <img src="./images/animal1.png" alt="Chicago" class="d-block w-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <!-- Card Content -->
+                                    <div class="image-wrapper">
+                                        <img src="./images/animal2.png" alt="Chicago" class="d-block w-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <!-- Card Content -->
+                                    <div class="image-wrapper">
+                                        <img src="./images/animal3.png" alt="Chicago" class="d-block w-100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <!-- Card Content -->
+                                    <div class="image-wrapper">
+                                        <img src="./images/animal4.png" alt="Chicago" class="d-block w-100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Left and right controls/icons -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- End main body -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
