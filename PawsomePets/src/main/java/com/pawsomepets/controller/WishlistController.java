@@ -23,6 +23,7 @@ public class WishlistController {
 
     Set<ConstraintViolation<Wishlist>> violations = new HashSet<>();
 
+    // display all wishlists
     @GetMapping( "/wishlists")
     public String displayWishlists(Model model) {
         List<Wishlist> wishlists = wishlistService.getAllWishlists();
@@ -31,6 +32,7 @@ public class WishlistController {
         return "wishlists";
     }
 
+    // display a wishlist by ID
     @GetMapping("/displayWishlistByID")
     public String displayWishlistByID(Integer wishlistID, Model model) {
         Wishlist wishlist = wishlistService.getWishlistByID(wishlistID);
@@ -39,6 +41,7 @@ public class WishlistController {
         return "wishlists";
     }
 
+    // display all wishlists by userID
     @GetMapping("/displayWishlistByUserID")
     public String displayWishlistByUserID (Integer userID, Model model) {
         List<Wishlist> wishlists = wishlistService.getWishlistsByUserID(userID);
@@ -47,43 +50,35 @@ public class WishlistController {
         return "wishlists";
     }
 
-    @PostMapping("/addWishlist")
-    public String addWishlist(@Valid String wishlistName, Integer userID) {
-        Wishlist wishlist = new Wishlist();
-        wishlist.setWishlistName(wishlistName);
-        wishlist.setUserID(userID);
-
-        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
-        violations = validate.validate(wishlist);
-
-        if (violations.isEmpty()) {
-            wishlistService.addWishlist(wishlist);
+    // create a wishlist
+    @PostMapping("/createWishlist")
+    public String addWishlist(@Valid Wishlist wishlist, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "wishlists";
         }
+        wishlistService.createWishlist(wishlist);
         return "redirect:/wishlists";
     }
 
-    @PostMapping("/addPetToWishlist")
-    public String addPetToWishlist(Integer wishlistID, Integer petID) {
-        wishlistService.addPetToWishlist(wishlistID, petID);
-        return "redirect:/wishlists";
-    }
-
-    @GetMapping("/editWishlist")
-    public String editWishlist(Integer wishlistID, Model model) {
+    // update a wishlist
+    @GetMapping("/updateWishlist")
+    public String updateWishlist(Integer wishlistID, Model model) {
         Wishlist wishlist = wishlistService.getWishlistByID(wishlistID);
         model.addAttribute("wishlist", wishlist);
-        return "editWishList";
+        return "updateWishList";
     }
 
-    @PostMapping("editSuperPower")
-    public String performEditSuperPower(@Valid Wishlist wishlist, BindingResult result) {
+    // perform the update
+    @PostMapping("/updateWishlist")
+    public String performupdateSuperPower(@Valid Wishlist wishlist, BindingResult result) {
         if (result.hasErrors()) {
-            return "editSuperPower";
+            return "/updateWishlist";
         }
-        wishlistService.editWishlist(wishlist);
-        return "redirect:/superpowers";
+        wishlistService.updateWishlist(wishlist);
+        return "redirect:/wishlists";
     }
 
+    // delete a wishlist
     @GetMapping("/deleteWishlistByID")
     public String deleteWishlistByID(Integer wishlistID, Model model) {
         Wishlist wishlist = wishlistService.getWishlistByID(wishlistID);
@@ -91,9 +86,24 @@ public class WishlistController {
         return "deleteWishlistByID";
     }
 
+    // peform the delete
     @PostMapping("/deleteWishlistByID")
     public String performDeleteWishlistByID(Integer wishlistID) {
-        wishlistService.deleteWishlistByID(wishlistID);
+        wishlistService.deleteWishlist(wishlistID);
+        return "redirect:/wishlists";
+    }
+
+    // add a pet to a wishlist
+    @PostMapping("/addPetToWishlist")
+    public String addPetToWishlist(Integer wishlistID, Integer petID) {
+        wishlistService.addPetToWishlist(wishlistID, petID);
+        return "redirect:/wishlists";
+    }
+
+    // remove a pet from a wishlist
+    @PostMapping("/removePetFromWishlist")
+    public String removePetFromWishlist(Integer wishlistID, Integer petID) {
+        wishlistService.removePetFromWishlist(wishlistID, petID);
         return "redirect:/wishlists";
     }
 }

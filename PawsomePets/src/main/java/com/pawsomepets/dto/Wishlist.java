@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "wishlists")
 public class Wishlist {
 
     @Id
@@ -26,5 +28,15 @@ public class Wishlist {
     @CollectionTable(name = "wishlist_pets", joinColumns = @JoinColumn(name = "wishlistID"))
     @Column(name = "petID")
     private List<Integer> petIDs = new ArrayList<>();
+
+    // Convenience method to add a petId to the wishlist
+    public void addPetId(int petID) {
+        this.petIDs.add(petID);
+    }
+
+    // Convenience method to remove a petId from the wishlist
+    public void removePetId(int petID) {
+        this.petIDs.remove(petID);
+    }
 
 }
