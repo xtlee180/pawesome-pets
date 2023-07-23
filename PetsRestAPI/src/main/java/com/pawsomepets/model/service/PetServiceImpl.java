@@ -15,12 +15,19 @@ public class PetServiceImpl implements PetService {
     @Autowired
     PetsDao petsDao;
 
-    //returns a list of all pets in the database
+
+    //specifically for available pets
     @Override
     public List<Pet> getAvailablePets() {
-        return petsDao.getAllAvailable(AvailEnum.AVAILABLE);
+        return petsDao.getPetsByStatus(AvailEnum.AVAILABLE);
     }
 
+    //used if need to get pets by a certain availability e.g. adopted or inprogress
+    public List<Pet> getPetsByAvailability(AvailEnum availability){
+        return petsDao.getPetsByStatus(availability);
+    }
+
+    //returns a list of all pets in the database
     @Override
     public List<Pet> getAllPets() {
         return petsDao.findAll();
@@ -33,17 +40,17 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public List<Pet> findPetByType(String type) {
+    public List<Pet> findPetsByType(String type) {
         return petsDao.getPetsByType(type);
     }
 
     @Override
-    public List<Pet> findPetByGender(GenderEnum gender) {
+    public List<Pet> findPetsByGender(GenderEnum gender) {
         return petsDao.getPetsByGender(gender);
     }
 
     @Override
-    public List<Pet> findPetBySize(SizeEnum size) {
+    public List<Pet> findPetsBySize(SizeEnum size) {
         return petsDao.getPetsBySize(size);
     }
 
@@ -58,7 +65,7 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public void deletePetById(Pet pet) {
+    public void deletePet(Pet pet) {
         petsDao.deletePetById(pet.getPetID());
     }
 

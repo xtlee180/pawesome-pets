@@ -4,7 +4,6 @@ import com.pawsomepets.dto.AvailEnum;
 import com.pawsomepets.dto.GenderEnum;
 import com.pawsomepets.dto.Pet;
 import com.pawsomepets.dto.SizeEnum;
-import org.hibernate.engine.jdbc.Size;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -54,7 +53,7 @@ public interface PetsDao extends JpaRepository<Pet, Integer> {
     List<Pet> getPetsBySize(@Param("size")SizeEnum size);
 
     @Query("FROM Pet p WHERE p.availability=:availability")
-    List<Pet> getAllAvailable(@Param("availability")AvailEnum availability);
+    List<Pet> getPetsByStatus(@Param("availability")AvailEnum availability);
 
     //only updates AVAILABILTIY
     @Modifying //use when performing data modification

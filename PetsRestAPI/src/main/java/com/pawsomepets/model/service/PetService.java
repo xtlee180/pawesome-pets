@@ -27,12 +27,12 @@ public interface PetService {
     List<Pet> getAvailablePets();
     List<Pet> getAllPets();
     Pet findPetById(int petID);
-    List<Pet> findPetByType(String type);
-    List<Pet> findPetByGender(GenderEnum gender);
-    List<Pet> findPetBySize(SizeEnum size);
+    List<Pet> findPetsByType(String type);
+    List<Pet> findPetsByGender(GenderEnum gender);
+    List<Pet> findPetsBySize(SizeEnum size);
     void updatePetAvailability(int id, AvailEnum availability);
     Pet updatePetDetails(Pet pet); //updates all fields of the pet
-    void deletePetById(Pet pet);
+    void deletePet(Pet pet);
     Pet addPet(Pet newPet);
 
 }

@@ -2,7 +2,7 @@ package com.pawsomepets.service;
 
 import com.pawsomepets.dao.WishlistDao;
 import com.pawsomepets.dto.Wishlist;
-import com.pets.dto.Pet;
+import com.pawsomepets.dto.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
