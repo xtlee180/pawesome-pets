@@ -8,19 +8,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 import java.util.List;
-//@Transactional
+@Transactional
 @Repository
 public interface WishlistDao extends JpaRepository<Wishlist, Integer> {
-    @Modifying
-    @Query(value = "INSERT INTO wishlist(wishlistName, userID) VALUES(?,?,?)",nativeQuery = true)
-    int insertWishlist(String wishlistName, int userID);
 
-    @Modifying
-    @Query("UPDATE Wishlist SET wishlistName = :wishlistName, userID = :userID where wishlistID = :wishlistID" )
-    int updateWishlist(@Param("wishlistID") int wishlistID, @Param("wishlistName") String wishlistName, @Param("userID") int userID);
-
+    // returns a list of userID from DB
     @Query("FROM Wishlist WHERE userID = :userID")
     List<Wishlist> findByUserID(@Param("userID") int userID);
-
 }
 

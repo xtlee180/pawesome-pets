@@ -2,75 +2,63 @@ package com.pawsomepets.service;
 
 import com.pawsomepets.dao.WishlistDao;
 import com.pawsomepets.dto.Wishlist;
-import com.pets.dto.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @Service
 public class WishlistServiceImpl implements WishlistService{
 
-    @Autowired
-    private WishlistDao wishlistDao;
-    @Autowired
-    private RestTemplate restTemplate;
 
+    @Autowired
+    WishlistDao wishlistDao;
+
+    // create a wishlist
+    public Wishlist createWishlist(Wishlist wishlist) {
+        return wishlistDao.save(wishlist);
+    }
+
+    // return a list of wishlists by ID
     public List<Wishlist> getAllWishlists() {
         return wishlistDao.findAll();
     }
 
+    // return a wishlist by ID
     public Wishlist getWishlistByID(int wishlistID) {
-        return wishlistDao.findById(wishlistID)
-                .orElseThrow(() -> new NotFoundException("Wishlist not found"));
+        return wishlistDao.findById(wishlistID).orElse(null);
     }
 
+    // returns a list of wishlists by userID
     public List<Wishlist> getWishlistsByUserID(int userID) {
         return wishlistDao.findByUserID(userID);
     }
 
-    public boolean addWishlist(Wishlist wishlist) {
-        try {
-            if (wishlistDao.insertWishlist(wishlist.getWishlistName(), wishlist.getUserID()) > 0) {
-                return true;
-            }
-        } catch(Exception ex) {
-            return false;
-        }
-        return false;
-//        return wishlistDao.save(wishlist);
+    // updates the edited wishlist
+    public void updateWishlist(Wishlist wishlist) {
+        wishlistDao.save(wishlist);
     }
 
-    public Wishlist addPetToWishlist(int wishlistID, int petID) {
-        ResponseEntity<Pet> response = restTemplate.getForEntity("http://pet-service/api/pets/%7Bid%7D", Pet.class, petID);
-        if (response.getStatusCode().is2xxSuccessful()) {
-            Pet pet = response.getBody();
-            if (pet != null) {
-                Wishlist wishlist = getWishlistByID(wishlistID);
-                wishlist.getPetIDs().add(petID);
-                return wishlistDao.save(wishlist);
-            }
-        }
-        throw new NotFoundException("Pet not found");
+    // delete a wishlist by ID
+    public void deleteWishlist(int wishlistID) {
+        wishlistDao.deleteById(wishlistID);
     }
 
-    public boolean editWishlist(Wishlist wishlist) {
-        try {
-            wishlistDao.updateWishlist(wishlist.getWishlistID(), wishlist.getWishlistName(), wishlist.getUserID());
-            return true;
-        } catch(Exception ex) {
-            return false;
+    // add a pet to the wishlist
+    public void addPetToWishlist(int wishlistID, int petID) {
+        Wishlist wishlist = getWishlistByID(wishlistID);
+        if (wishlist != null) {
+            wishlist.addPetId(petID);
+            wishlistDao.save(wishlist);
         }
     }
 
-    public boolean deleteWishlistByID(int wishlistID) {
-        if (wishlistDao.existsById(wishlistID)) {
-            wishlistDao.deleteById(wishlistID);
-            return true;
-        } else {
-            throw new NotFoundException("Wishlist not found");
+    // remove a pet from the wishlist
+    public void removePetFromWishlist(int wishlistID, int petID) {
+        Wishlist wishlist = wishlistDao.findById(wishlistID).orElse(null);
+        if (wishlist != null) {
+            wishlist.removePetId(petID-1);
+            wishlistDao.save(wishlist);
         }
     }
 
