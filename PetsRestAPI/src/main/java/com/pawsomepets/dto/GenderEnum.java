@@ -1,5 +1,5 @@
 package com.pawsomepets.dto;
 
 public enum GenderEnum {
-    FEMALE, MALE
+    FEMALE, MALE, UNKNOWN
 }

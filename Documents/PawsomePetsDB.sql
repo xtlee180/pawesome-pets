@@ -14,6 +14,20 @@ petType varchar(25) not null,
 petBreed varchar(50) not null,
 petImage varchar(250));
 
+INSERT INTO pet(petID, petName, petAvailability, petDesc, petGender, petSize, petAge, petType, petBreed)
+VALUES (101, 'Buddy', 'Available', 'A friendly and loyal companion, loves playing fetch.', 'Male', 'Medium', 3, 'Dog','Golden Retriever'),
+(102, 'Luna', 'Available', 'An elegant and independent feline, enjoys lounging in sunspots.', 'Female', 'Small', 2,'Cat', 'Siamese'),
+(103, 'Kiwi', 'Available', 'A colorful and talkative parrot, loves mimicking sounds.', 'Male', 'Small', 5, 'Bird', 'African Grey Parrot'),
+(104, 'Snowball', 'Adopted', 'A cute and cuddly rabbit, enjoys hopping around.', 'Female', 'Small', 1 ,'Rabbit', 'Dwarf Rabbit'),
+(105,'Bubbles', 'Available', 'A colorful and peaceful fish, adds serenity to any aquarium.', 'Unknown', 'Small', 1, 'Fish','Betta Fish'),
+(106,'Spike', 'Available', 'A slithery and low-maintenance snake, a unique pet.', 'Male', 'Medium', 4,'Reptile', 'Ball Python'),
+(107,'Nibbles', 'Available', 'An adorable and active hamster, enjoys running on wheels.', 'Female', 'Small', 1,'Small Buddies', 'Syrian Hamster'),
+(108,'Sheldon', 'Available', 'A slow and wise turtle, needs a comfortable basking area.', 'Male', 'Small', 3,'Reptile', 'Red-Eared Slider'),
+(109,'Cocoa', 'Available', 'A gentle and social guinea pig, loves fresh vegetables.', 'Female', 'Small', 2,'Guinea Pig', 'Abyssinian Guinea Pig'),
+(110,'Bandit', 'Available', 'An energetic and mischievous ferret, needs regular playtime.', 'Male', 'Small', 1,'Ferret', 'Sable Ferret'),
+(111, 'Maisie', 'Adopted', 'A friendly and shy hamster who loves burrowing and exploring.', 'Female', 'Small', 1, 'Small Buddies', 'Dwarf Hamster');
+
+
 drop database if exists pawsomeUsers;
 create database pawsomeUsers;
 use pawsomeUsers;
