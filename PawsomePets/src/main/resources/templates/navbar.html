@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NavigationBar</title>
+    <link rel="stylesheet" th:href="home.css">
+
+</head>
+<body>
+<!--add to html files to reuse html code-->
+<!--<div th:replace="navbar:: header"></div>-->
+<!--<div th:replace="navbar:: navbar"></div>-->
+<div class="container-fluid">
+    <nav th:fragment="navbar" class="navbar col-md-6 col-12 text-center">
+        <!-- need to add logo on far left-->
+        <div class="logo-container">
+            <img class="paw1" src="./images/paw.png" alt="paw">
+            <p>Pawsome Pets</p>
+            <img class="paw2" src="./images/paw.png" alt="paw">
+        </div>
+        <ul class="nav-container">
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:src="@{/}" th:class="${currentPage == 'home' ? 'active' : ''}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:src="@{/pets}" th:class="${currentPage == 'pets' ? 'active' : ''}">Adopt Me?</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:src="@{/aboutus}" th:class="${currentPage == 'aboutus' ? 'active' : ''}">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:src="@{/contact}" th:class="${currentPage == 'contact' ? 'active' : ''}">Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</div>
+</body>
+</html>
