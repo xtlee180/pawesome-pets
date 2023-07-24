@@ -3,107 +3,91 @@ package com.pawsomepets.controller;
 import com.pawsomepets.dto.Wishlist;
 import com.pawsomepets.service.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-@RestController
-//@RequestMapping("/wishlists")
+@Controller
+@RequestMapping("/wishlists")
 public class WishlistController {
 
     @Autowired
     private WishlistService wishlistService;
 
-    Set<ConstraintViolation<Wishlist>> violations = new HashSet<>();
-
-    // display all wishlists
-    @GetMapping( "/wishlists")
-    public String displayWishlists(Model model) {
-        List<Wishlist> wishlists = wishlistService.getAllWishlists();
-        model.addAttribute("wishList", wishlists);
-        model.addAttribute("errors", violations);
-        return "wishlists";
+    @GetMapping("/")
+    public String displaypage(Model model) {
+        return "home";
     }
 
-    // display a wishlist by ID
-    @GetMapping("/displayWishlistByID")
-    public String displayWishlistByID(Integer wishlistID, Model model) {
-        Wishlist wishlist = wishlistService.getWishlistByID(wishlistID);
-        model.addAttribute("wishList", wishlist);
-        model.addAttribute("errors", violations);
-        return "wishlists";
-    }
+    @GetMapping
+    public String showUserWishlist(@RequestParam(required = false) Integer userID, Model model) {
+        // Get the logged-in user's details from Spring Security Authentication
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String username = authentication.getName();
 
-    // display all wishlists by userID
-    @GetMapping("/displayWishlistByUserID")
-    public String displayWishlistByUserID (Integer userID, Model model) {
-        List<Wishlist> wishlists = wishlistService.getWishlistsByUserID(userID);
-        model.addAttribute("wishList", wishlists);
-        model.addAttribute("errors", violations);
-        return "wishlists";
-    }
+        // Now, you can use the username to retrieve the actual user from your database
+        // For example, if you have a UserService to manage users, you can do something like:
+        // User user = userService.getUserByUsername(username);
 
-    // create a wishlist
-    @PostMapping("/createWishlist")
-    public String addWishlist(@Valid Wishlist wishlist, BindingResult bindingResult){
-        if (bindingResult.hasErrors()) {
-            return "wishlists";
+        // For this example, let's assume you have the user's ID as "1" for demonstration purposes.
+        if (userID == null) {
+            // If userID is not provided, set it to the ID of the logged-in user
+            // Replace 1 with the actual user ID retrieved from your database.
+            userID = 1;
         }
+
+        // Retrieve the wishlists specific to the user with the given userID
+        List<Wishlist> userWishlists = wishlistService.getWishlistsByUserID(userID);
+
+        model.addAttribute("wishlists", userWishlists);
+        return "Wishlist/Wishlist"; // Return the Wishlist.html page
+    }
+
+    @PostMapping
+    public String createWishlist(@ModelAttribute Wishlist wishlist) {
+        // Get the logged-in user's details from Spring Security Authentication
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String username = authentication.getName();
+
+        // Now, you can use the username to retrieve the actual user from your database
+        // For example, if you have a UserService to manage users, you can do something like:
+        // User user = userService.getUserByUsername(username);
+
+        // For this example, let's assume you have the user's ID as "1" for demonstration purposes.
+        int userID = 1;
+        wishlist.setUserID(userID);
         wishlistService.createWishlist(wishlist);
-        return "redirect:/wishlists";
+        return "redirect:/wishlists"; // Redirect back to the wishlist page
     }
 
-    // update a wishlist
-    @GetMapping("/updateWishlist")
-    public String updateWishlist(Integer wishlistID, Model model) {
+    @GetMapping("/{wishlistID}")
+    public String editWishlist(@PathVariable int wishlistID, Model model) {
         Wishlist wishlist = wishlistService.getWishlistByID(wishlistID);
         model.addAttribute("wishlist", wishlist);
-        return "updateWishList";
+        return "edit_wishlist"; // Create an edit_wishlist.html page for editing
     }
 
-    // perform the update
-    @PostMapping("/updateWishlist")
-    public String performupdateSuperPower(@Valid Wishlist wishlist, BindingResult result) {
-        if (result.hasErrors()) {
-            return "/updateWishlist";
-        }
+    @PostMapping("/{wishlistID}")
+    public String updateWishlist(@PathVariable int wishlistID, @ModelAttribute Wishlist updatedWishlist) {
+        Wishlist wishlist = wishlistService.getWishlistByID(wishlistID);
+        wishlist.setWishlistName(updatedWishlist.getWishlistName());
         wishlistService.updateWishlist(wishlist);
-        return "redirect:/wishlists";
+        return "redirect:/wishlists"; // Redirect back to the wishlist page
     }
 
-    // delete a wishlist
-    @GetMapping("/deleteWishlistByID")
-    public String deleteWishlistByID(Integer wishlistID, Model model) {
-        Wishlist wishlist = wishlistService.getWishlistByID(wishlistID);
-        model.addAttribute("wishlist", wishlist);
-        return "deleteWishlistByID";
-    }
-
-    // peform the delete
-    @PostMapping("/deleteWishlistByID")
-    public String performDeleteWishlistByID(Integer wishlistID) {
+    @PostMapping("/{wishlistID}/delete")
+    public String deleteWishlist(@PathVariable int wishlistID) {
         wishlistService.deleteWishlist(wishlistID);
-        return "redirect:/wishlists";
+        return "redirect:/wishlists"; // Redirect back to the wishlist page
     }
 
-    // add a pet to a wishlist
-    @PostMapping("/addPetToWishlist")
-    public String addPetToWishlist(Integer wishlistID, Integer petID) {
-        wishlistService.addPetToWishlist(wishlistID, petID);
-        return "redirect:/wishlists";
-    }
 
-    // remove a pet from a wishlist
-    @PostMapping("/removePetFromWishlist")
-    public String removePetFromWishlist(Integer wishlistID, Integer petID) {
-        wishlistService.removePetFromWishlist(wishlistID, petID);
-        return "redirect:/wishlists";
+    @GetMapping("/{wishlistId}/pets")
+    @ResponseBody
+    public ResponseEntity<List<Integer>> getPetIdsForWishlist(@PathVariable int wishlistId) {
+        List<Integer> petIds = wishlistService.getPetIdsForWishlist(wishlistId);
+        return ResponseEntity.ok(petIds);
     }
 }

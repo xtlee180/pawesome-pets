@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -160,6 +161,30 @@ public class WishlistServiceTest {
         // Verify
         assertFalse(wishlist1.getPetIDs().contains(1));
         verify(wishlistDao, times(1)).save(wishlist1);
+    }
+
+
+    @Test
+    public void testGetPetIdsForWishlist() {
+        int wishlistId = 1;
+        List<Integer> expectedPetIds = Arrays.asList(101, 102, 103);
+
+        // Create a Wishlist object with the specified wishlistId and petIds
+        Wishlist wishlist = new Wishlist();
+        wishlist.setWishlistID(wishlistId);
+        wishlist.setPetIDs(expectedPetIds);
+
+        // Mock the behavior of the wishlistDao.findById method to return the Wishlist object
+        when(wishlistDao.findById(wishlistId)).thenReturn(Optional.of(wishlist));
+
+        // Call the getPetIdsForWishlist method and verify the result
+        List<Integer> actualPetIds = wishlistService.getPetIdsForWishlist(wishlistId);
+
+        // Assert that the actual petIds match the expected petIds
+        assertEquals(expectedPetIds, actualPetIds);
+
+        // Verify that the wishlistDao.findById method was called once with the correct wishlistId
+        verify(wishlistDao, times(1)).findById(wishlistId);
     }
 
 }

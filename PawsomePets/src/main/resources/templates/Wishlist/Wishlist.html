@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Wishlist</title>
+</head>
+<body>
+<h1>Welcome to Your Wishlist</h1>
+
+<h2>Create New Wishlist</h2>
+<form th:action="@{/wishlists}" method="post">
+    <label for="newWishlistName">Wishlist Name:</label>
+    <input type="text" id="newWishlistName" name="wishlistName" required>
+    <button type="submit">Create Wishlist</button>
+</form>
+
+
+<!-- Show all wishlists specific to the user -->
+<h2>Your Wishlists</h2>
+<div th:each="wishlist : ${wishlists}">
+    <form th:object="${wishlist}" th:action="@{'/wishlists/' + ${wishlist.wishlistID}}" method="post">
+        <!-- Use the wishlist name itself as a button to show pet IDs -->
+        <button type="button" onclick="showPets(this)" th:attr="data-wishlist-id=${wishlist.wishlistID}">
+            <span th:id="'wishlistName-' + ${wishlist.wishlistID}" th:text="${wishlist.wishlistName}"
+                  th:unless="${isEditing}"></span>
+        </button>
+        <input th:if="${isEditing}" type="text" th:field="*{wishlistName}" th:value="${wishlist.wishlistName}" required>
+        <button type="submit" th:if="${isEditing}">Save</button>
+        <button type="button" onclick="enterEditMode(this)" th:unless="${isEditing}">Edit</button>
+    </form>
+    <form th:action="@{'/wishlists/' + ${wishlist.wishlistID} + '/delete'}" method="post">
+        <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this wishlist?');">
+    </form>
+    <br>
+    <br>
+</div>
+
+<div id="petsContainer">
+    <h3 id="selectedWishlistName"></h3>
+    <ul id="selectedWishlistPets">
+    </ul>
+</div>
+
+
+<!-- Create a new wishlist -->
+
+
+<script th:inline="javascript">
+    // Initialize the selectedWishlistId to null
+    var selectedWishlistId = null;
+
+    function editWishlistName(spanElement) {
+        const span = spanElement;
+        const li = span.parentElement;
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = "wishlistName"; // Set the input field name
+        input.value = span.textContent;
+        input.required = true;
+
+        const saveButton = document.createElement("button");
+        saveButton.type = "submit";
+        saveButton.textContent = "Save";
+
+        const cancelButton = document.createElement("button");
+        cancelButton.type = "button";
+        cancelButton.textContent = "Cancel";
+        cancelButton.onclick = function () {
+            li.replaceChild(span, input);
+            li.removeChild(saveButton);
+            li.removeChild(cancelButton);
+        };
+
+        li.replaceChild(input, span);
+        li.appendChild(saveButton);
+        li.appendChild(cancelButton);
+    }
+
+    function enterEditMode(buttonElement) {
+        const editButton = buttonElement;
+        const li = editButton.parentElement;
+        const span = li.querySelector("span");
+        editWishlistName(span);
+    }
+
+    function showPets(buttonElement) {
+        const wishlistId = buttonElement.getAttribute("data-wishlist-id");
+        const selectedWishlistName = document.getElementById("selectedWishlistName");
+        const selectedWishlistPets = document.getElementById("selectedWishlistPets");
+
+        // AJAX request to fetch the pet IDs for the selected wishlist
+        fetch('/wishlists/' + wishlistId + '/pets')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(petIds => {
+                console.log("Response petIds:", petIds); // To check the petIds received in the response
+
+                // Update the heading with the name of the selected wishlist
+                const wishlistName = buttonElement.querySelector("span").textContent;
+                selectedWishlistName.textContent = wishlistName;
+
+                // Update the HTML to display pet IDs for the selected wishlist
+                selectedWishlistPets.innerHTML = ""; // Clear the previous pet IDs
+                petIds.forEach(petId => {
+                    const petIdItem = document.createElement("li");
+                    petIdItem.textContent = petId;
+                    selectedWishlistPets.appendChild(petIdItem);
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching pet IDs:", error);
+            });
+    }
+</script>
+</body>
+</html>
+
+
+
+
+

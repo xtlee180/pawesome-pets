@@ -12,6 +12,8 @@ public interface WishlistService {
     List<Wishlist> getWishlistsByUserID(int userID);
     void updateWishlist(Wishlist wishlist);
     void deleteWishlist(int wishlistID);
+//    List<Integer> getPetIdsForWishlist(int wishlistId);
+    List<Integer> getPetIdsForWishlist(int wishlistID);
     void addPetToWishlist(int wishlistID, int petID);
     void removePetFromWishlist(int wishlistID, int petID);
 }
