@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.user.dto.Login;
 import com.user.dto.User;
 import com.user.service.UserService;
 
@@ -24,8 +25,8 @@ public class UserResource {
 	UserService userService;
 	
 	@PostMapping(path = "/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public User getUserByUnAndPw(@RequestBody User user) {
-		return userService.getByNameAndPass(user.getUserName(), user.getUserPassword());
+	public User getUserByUnAndPw(@RequestBody Login login) {
+		return userService.getByNameAndPass(login.getUserName(), login.getUserPassword());
 	}
 	
 	@GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE)

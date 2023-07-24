@@ -32,20 +32,20 @@
                 <a class="nav-link" href="#" th:src="@{/contact}" th:class="${currentPage == 'contact' ? 'active' : ''}">Contact Us</a>
             </li>
         </ul>
-        <div th:if="${sessionUser == null}">
+        <div th:if="${session.sessionUser == null}">
         	<a class = "btn btn-primary" href="#" th:src="@{/login}">Sign In</a>
         </div>
-        <div th:if="${sessionUser != null}">
+        <div th:if="${session.sessionUser != null}">
         	<div class= "dropdown">
         		<button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        			<span th:text="${sessionUser.userName}"></span>
+        			<span th:text="${session.sessionUser.userName}"></span>
         		</button>
         	</div>
         	<div class="dropdown-menu" aria-labelledby="userDropdown">
         		<a class="dropdown-item" href="#" th:src="@{/userProfile}">Profile</a>
         		<a class="dropdown-item" href="#" th:src="@{/wishlist}">Wishlist</a>
         		<a class="dropdown-item" href="#" th:src="@{/applications}">Applications</a>
-        		<a th:if="${sessionUser.userType == T(com.pawsomepets.dto.UserType).ADMIN}" class="dropdown-item" href="#" th:src="@{/admin}">Admin</a>
+        		<a th:if="${session.sessionUser.userType.toString() == 'ADMIN'}" class="dropdown-item" href="#" th:src="@{/admin}">Admin</a>
         		<div class = "dropdown-divider"></div>
         		<a class="dropdown-item" href="#" th:src="@{/logout}">Logout</a>
         	</div>

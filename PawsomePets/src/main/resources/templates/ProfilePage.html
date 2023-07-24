@@ -13,7 +13,10 @@
 
 <body>
     <!--Navbar-->
+    
+    
     <div class="v16_597">
+    <div th:replace="navbar:: navbar">
         <div class="v16_598"></div>
         <span class="v16_599">Pawsome Pets</span>
         <div class="v16_600">
@@ -22,6 +25,7 @@
             <span class="v16_603">Contact Us</span>
             <span class="v16_604">Adopt me?</span>
         </div>
+     
         <!-- <span class="v16_605">Sign In</span> -->
         <!--Paws for logo-->
         <div class="v16_606"></div>
@@ -29,23 +33,26 @@
             <!-- <span class="v16_609">Sign In</span> -->
         <!-- <div class="v16_610"></div>
         <div class="v16_611"></div> -->
-        
+        </div>
         
         <!--Pink box-->
         <div class="v16_612"></div>
         <span class="v16_613">My Profile</span>
         
         <!--Rectangles-->
-        <div class="v16_615 infoText">First Name</div>
-        <div class="v16_617 infoText">Last Name</div>
-        <div class="v16_619 infoText">Email Address</div>
-        <div class="v16_618 infoText">Phone number</div>
-        <div class="v16_614 infoText">Username</div>
-        <div class="v16_616 infoText">Password</div>
+        <h2 th:text="${message}"></h2>
+        <div class="v16_615 infoText" th:text="${user.firstName}">First Name</div>
+        <div class="v16_617 infoText" th:text="${user.lastName}">Last Name</div>
+        <div class="v16_619 infoText" th:text="${user.email}">Email Address</div>
+        <div class="v16_618 infoText" th:text="${user.phoneNumber}">Phone number</div>
+        <div class="v16_614 infoText" th:text="${user.userName}">Username</div>
+        <div class="v16_616 infoText"><span id= "password" th:text="*{hiddenPassword}"></span>
+        	<button id="showHideButton">View</button>
+        </div>
 
         <!--Profile picture button kinda want to make a dropdown in menu and figure that out -->
-        <a href="#" class="v16_639 center"></a>
-        <div class="v16_666"></div>
+      <!--   <a href="#" class="v16_639 center"></a>
+        <div class="v16_666"></div>--> 
 
         <!--Buttons-->
         <a href="#" class="v16_692 nav">Edit Info</a>
@@ -54,6 +61,21 @@
         <a href="#" class="v16_787 nav">Delete Account</a>
 
     </div>
+    
+        <script>
+        const passwordSpan = document.getElementById("password");
+        const showHideButton = document.getElementById("showHideButton");
+
+        showHideButton.addEventListener("click", function () {
+            if (passwordSpan.textContent === "*********") {
+                passwordSpan.textContent = "[[*{actualPassword}]]";
+                showHideButton.textContent = "Hide";
+            } else {
+                passwordSpan.textContent = "*********";
+                showHideButton.textContent = "View";
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +30,11 @@ public class User {
 	private String lastName;
 	private String email;
 	private String phoneNumber;
+	
+	@Transient
+	private String confirmPassword;
+	
+	
 	
 	public User(String userName, String password, UserType userType, String firstName, String lastName, String email,
 			String phoneNumber) {

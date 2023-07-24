@@ -15,6 +15,7 @@
 <body>
     <!--Nav bar stuff-->
     <div class="v10_5">
+    <div th:replace="navbar:: navbar">
         <span class="v16_4">Pawsome Pets</span>
         <div class="v16_5">
             <a class="v16_6 nav" href="#">Home</a>
@@ -22,6 +23,7 @@
             <a class="v16_8 nav" href="#">Contact Us</a>
             <a class="v16_9 nav" href="#">Adopt me?</a>
         </div>
+     </div>
             <!-- <a class="v16_10" href="#">Sign In</a> -->
             
         <!--Paw prints in logo-->
@@ -30,18 +32,18 @@
         <!--Sign in button-->
         <a class="v16_13 nav" href="#">Sign in</a>
 
-        <!--Boxes behint login form-->
+        <!--Boxes behind login form-->
         <div class="v16_41"></div>
         <div class="v16_18"></div>
 
         <!--Login form-->
-        <form>
-            <input class="v16_70" type="text"></input>
-            <input class="v16_72" type="password"></input>
+        <form action="#" th:action="@{/loginUser}" th:object="${login}" method="post">
+            <input class="v16_70" type="text" th:field="*{userName}"></input>
+            <input class="v16_72" type="password" th:field="*{userPassword}"></input>
             <span class="v16_73">Username</span>
             <span class="v16_74">Password</span>
 
-            <button class="v16_75" href="#" type="submit">Login</button>
+            <button class="v16_75" type="submit">Login</button>
         </form>
 
         <!--Sign up -->
