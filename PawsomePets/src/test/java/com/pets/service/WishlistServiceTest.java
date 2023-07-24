@@ -1,6 +1,7 @@
-package com.pawsomepets.service;
+package com.pets.service;
 
-import com.pawsomepets.dao.WishlistDao;
+import com.pawsomepets.service.WishlistServiceImpl;
+import com.pets.dao.WishlistDao;
 import com.pawsomepets.dto.Wishlist;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;

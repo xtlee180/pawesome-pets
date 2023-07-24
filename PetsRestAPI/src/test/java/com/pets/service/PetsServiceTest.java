@@ -1,11 +1,11 @@
-package com.pawsomepets.service;
+package com.pets.service;
 
-import com.pawsomepets.dto.AvailEnum;
-import com.pawsomepets.dto.GenderEnum;
-import com.pawsomepets.dto.Pet;
-import com.pawsomepets.dto.SizeEnum;
-import com.pawsomepets.model.dao.PetsDao;
-import com.pawsomepets.model.service.PetServiceImpl;
+import com.pets.dto.AvailEnum;
+import com.pets.dto.GenderEnum;
+import com.pets.dto.Pet;
+import com.pets.dto.SizeEnum;
+import com.pets.model.dao.PetsDao;
+import com.pets.model.service.PetServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

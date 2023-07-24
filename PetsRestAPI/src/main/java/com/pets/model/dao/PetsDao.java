@@ -1,9 +1,9 @@
-package com.pawsomepets.model.dao;
+package com.pets.model.dao;
 
-import com.pawsomepets.dto.AvailEnum;
-import com.pawsomepets.dto.GenderEnum;
-import com.pawsomepets.dto.Pet;
-import com.pawsomepets.dto.SizeEnum;
+import com.pets.dto.AvailEnum;
+import com.pets.dto.GenderEnum;
+import com.pets.dto.Pet;
+import com.pets.dto.SizeEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

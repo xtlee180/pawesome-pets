@@ -1,4 +1,4 @@
-package com.pawsomepets.dto;
+package com.pets.dto;
 
 public enum SizeEnum {
         SMALL, MEDIUM, LARGE
