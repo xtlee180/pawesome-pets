@@ -29,7 +29,7 @@ public class AuthController {
         User user = userDao.findByUsername(username);
         if (user != null && passwordEncoder.matches(password, user.getUserPassword())) {
             String token = JwtUtils.generateToken(username);
-            return ResponseEntity.ok("logged in");//token
+            return ResponseEntity.ok(token);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
