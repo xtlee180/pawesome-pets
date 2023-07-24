@@ -1,18 +1,12 @@
 package com.application.controller;
-
-import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.application.dto.Application;
 import com.application.dto.ApplicationList;
@@ -24,47 +18,69 @@ public class ApplicationController {
 	private ApplicationService applicationService;
 
 	// Add an application
-	@PostMapping(path = "/applications", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Application addApplication(@RequestBody Application application) {
+	@PostMapping("/addApplication")
+	public ModelAndView saveApplicationController(Application application) {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		String message = null;
 		if (applicationService.addApplication(application))
-			return application;
+			message = "Congrats, your application is successful!";
 		else
-			return null;
+			message = "An application couldn't be made at this time";
+
+		modelAndView.addObject("message", message);
+		modelAndView.setViewName("ApplicationConfirmationPage");
+
+		return modelAndView;
 	}
 
 	// Get all applications
-	@GetMapping(path = "/applications", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ApplicationList getAllApplications() {
-		return new ApplicationList(applicationService.getAllApplications());
+	@GetMapping("/applications")
+	public ModelAndView displayapplicationsController() {
+		ModelAndView modelAndView = new ModelAndView();
+
+		List<Application> applicationList = applicationService.getAllApplications();
+		modelAndView.addObject("applications", applicationList);
+		modelAndView.addObject("app", new Application());
+		modelAndView.setViewName("DisplayApplicationsPage");
+		return modelAndView;
 	}
 
 	// Get application by ID
-	@GetMapping(path = "/applications/{applicationID}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Application getApplicationByID(@PathVariable("applicationID") int id) {
-		return applicationService.getApplicationByID(id);
-	}
+	@GetMapping("/applicationsByID")
+    public String displayApplicationByID(int applicationID, Model model) {
+		Application application = applicationService.getApplicationByID(applicationID);
+        model.addAttribute("application", application);
+        return "applications";
+    }
 
 	// Edit an application
-	@PutMapping(path = "/applications/{applicationID}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public String editApplication(@PathVariable("applicationID") int id, @RequestBody Application updatedApplication) {
-		int petID = updatedApplication.getPetID();
-		int userID = updatedApplication.getUserID();
-		LocalDate applicationDate = updatedApplication.getApplicationDate();
-		LocalDate pickupDate = updatedApplication.getPickupDate();
+    @GetMapping("/editApplication")
+    public String editApplication(int applicationID, Model model) {
+    	Application application = applicationService.getApplicationByID(applicationID);
+        model.addAttribute("application", application);
+        return "ApplicationEditPage";
+    }
 
-		boolean isUpdated = applicationService.editApplicationByID(id, petID,
-				userID, applicationDate, pickupDate);
-		
-		if (isUpdated) {
-			return "Application updated successfully.";
-		} else {
-			return "Failed to update application.";
-		}
-	}
-
+	@PostMapping("/editOrganisation")
+    public String EditApplicationImpl(Application application) {
+        applicationService.editApplicationByID(application.getApplicationID(), 
+        		application.getPetID(), application.getUserID(),
+        		application.getApplicationDate(), application.getPickupDate());
+        return "redirect:/applications";
+    }
+    
 	// Delete an application
-	@DeleteMapping(path = "/applications/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Application deleteEmployeeByID(@PathVariable int id) {
-		return applicationService.deleteApplicationByID(id);
-	}
+	@GetMapping("/deleteApplication")
+	 public String deleteApplication(int applicationID, Model model) {
+        Application application = applicationService.getApplicationByID(applicationID);
+        model.addAttribute("application", application);
+        return "ApplicationDeletePage";
+    }
+	
+	@PostMapping("/deleteApplication")
+	public String deleteApplicationPage(int applicationID) {
+        applicationService.deleteApplicationByID(applicationID);
+        return "redirect:/applications";
+    }
 }
