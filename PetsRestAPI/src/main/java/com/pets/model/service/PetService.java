@@ -1,9 +1,9 @@
-package com.pawsomepets.model.service;
+package com.pets.model.service;
 
-import com.pawsomepets.dto.AvailEnum;
-import com.pawsomepets.dto.GenderEnum;
-import com.pawsomepets.dto.Pet;
-import com.pawsomepets.dto.SizeEnum;
+import com.pets.dto.AvailEnum;
+import com.pets.dto.GenderEnum;
+import com.pets.dto.Pet;
+import com.pets.dto.SizeEnum;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.pawsomepets.dto;
+package com.pets.dto;
 
 
 import lombok.AllArgsConstructor;

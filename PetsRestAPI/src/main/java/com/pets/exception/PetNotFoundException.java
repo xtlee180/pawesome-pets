@@ -1,4 +1,4 @@
-package com.pawsomepets.exception;
+package com.pets.exception;
 
 public class PetNotFoundException extends Exception {
     public PetNotFoundException(String message){
