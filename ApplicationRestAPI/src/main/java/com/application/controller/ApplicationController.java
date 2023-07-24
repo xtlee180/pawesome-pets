@@ -62,7 +62,7 @@ public class ApplicationController {
         return "ApplicationEditPage";
     }
 
-	@PostMapping("/editOrganisation")
+	@PostMapping("/editApplication")
     public String EditApplicationImpl(Application application) {
         applicationService.editApplicationByID(application.getApplicationID(), 
         		application.getPetID(), application.getUserID(),
