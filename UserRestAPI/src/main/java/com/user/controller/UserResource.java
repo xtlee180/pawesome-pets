@@ -23,9 +23,9 @@ public class UserResource {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping(path = "/users/{un}/{pw}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public User getUserByUnAndPw(@PathVariable("un")String username,@PathVariable("pw") String password) {
-		return userService.getByNameAndPass(username, password);
+	@PostMapping(path = "/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public User getUserByUnAndPw(@RequestBody User user) {
+		return userService.getByNameAndPass(user.getUserName(), user.getUserPassword());
 	}
 	
 	@GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE)

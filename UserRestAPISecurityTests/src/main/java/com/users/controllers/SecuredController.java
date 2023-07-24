@@ -16,8 +16,8 @@ public class SecuredController {
 	private UserDao userDao;
 	
 	@GetMapping(path="/secured",produces = MediaType.APPLICATION_JSON_VALUE)
-    public User secured(@RequestHeader("Authorization") String tokenHeader) {
-        String token = tokenHeader.substring("Bearer ".length());
+    public User secured(@RequestHeader("Authorization") String token) {
+//        String token = tokenHeader.substring("Bearer ".length());
         String username = JwtUtils.extractUsername(token);
 
         User user = userDao.findByUsername(username);
