@@ -6,6 +6,9 @@ import com.pets.dto.Pet;
 import com.pets.dto.SizeEnum;
 import com.pets.model.dao.PetsDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +21,9 @@ public class PetServiceImpl implements PetService {
 
     //specifically for available pets
     @Override
-    public List<Pet> getAvailablePets() {
-        return petsDao.getPetsByStatus(AvailEnum.AVAILABLE);
+    public Page<Pet> getAvailablePetsPaginated(AvailEnum availability, int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        return petsDao.findAvailablePets(availability, pageable);
     }
 
     //used if need to get pets by a certain availability e.g. adopted or inprogress

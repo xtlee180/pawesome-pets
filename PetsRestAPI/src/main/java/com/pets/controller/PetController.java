@@ -1,10 +1,12 @@
 package com.pets.controller;
 
 
+import com.pets.dto.AvailEnum;
 import com.pets.dto.GenderEnum;
 import com.pets.dto.Pet;
 import com.pets.model.service.PetServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -31,27 +33,46 @@ public class PetController {
         List<Pet> listOfAllPets = petService.getAllPets();
         model.addAttribute("errors", violations);
         model.addAttribute("pets", listOfAllPets);
-        return "allPets";
+        return "redirect:/petsMainPage";
     }
+
+    @GetMapping("/petsByAvailability")
+    public String showPetsByAvailability(Model model, AvailEnum availability){
+        List<Pet> listOfPets = petService.getPetsByAvailability(availability);
+        model.addAttribute("errors", violations);
+        model.addAttribute("availability", listOfPets);
+        return "redirect:/petsMainPage"; //filter page to show by pets depending on availability
+    } //probably more used for admin role
 
     //gets all pets available for adoption
     @GetMapping("/pets")
-    public String showAllAvailable(Model model){
-        List<Pet> availablePets = petService.getAvailablePets();
+    public String showAllAvailable(Model model,
+                                   @RequestParam(defaultValue = "0") int page,
+                                   @RequestParam(defaultValue = "8") int size,
+                                   @RequestParam(defaultValue = "AVAILABLE")AvailEnum filter){
+        Page<Pet> listOfPets = petService.getAvailablePetsPaginated(filter, page, size);
         model.addAttribute("errors", violations);
-        model.addAttribute("available", availablePets);
-        return "pets";
+        model.addAttribute("petsMainPage", listOfPets);
+        model.addAttribute("currentFilter", filter);
+        return "petsMainPage";
     }
 
+    //need to sort out filters for dropdowns
     @GetMapping("/petsByGender")
     public String filterByGender(Model model, @RequestParam("gender") GenderEnum gender){ //drop-down to get pets filter by gender
         List<Pet> petsByGender = petService.findPetsByGender(gender);
         model.addAttribute("errors", violations);
         model.addAttribute("gender", petsByGender);
-        return "pets";
+        return "redirect:/petsMainPage";
     }
 
-    
+    @GetMapping("/petById")
+    public String findPetByID(Model model, @RequestParam("id") int petID){
+        Pet pet = petService.findPetById(petID);
+        model.addAttribute("errors", violations);
+        model.addAttribute("id", pet);
+        return "petInfoPage";
+    }
 
     //adding new pet
     @GetMapping("/addPet") //for form
@@ -66,7 +87,7 @@ public class PetController {
             return "addPet";
         }
         petService.addPet(pet);
-        return "redirect:/pets";
+        return "redirect:/petsMainPage";
     }
 
     //updating details of a pet
@@ -83,7 +104,7 @@ public class PetController {
             return "/updatePet";
         }
         petService.updatePetDetails(petToUpdate);
-        return "redirect:/pets";
+        return "redirect:/petsMainPage";
     }
 
     @GetMapping("/deletePet")
@@ -97,7 +118,7 @@ public class PetController {
     public String executeDeletePet(Integer petID){
         Pet petToDelete = petService.findPetById(petID);
         petService.deletePet(petToDelete);
-        return "redirect:/pets";
+        return "redirect:/petsMainPage";
     }
 
 }
