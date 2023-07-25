@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>NavigationBar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" th:href="home.css">
 
 </head>
@@ -31,27 +33,33 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" th:src="@{/contact}" th:class="${currentPage == 'contact' ? 'active' : ''}">Contact Us</a>
             </li>
-        </ul>
-        <div th:if="${session.sessionUser == null}">
-        	<a class = "btn btn-primary" href="#" th:src="@{/login}">Sign In</a>
-        </div>
-        <div th:if="${session.sessionUser != null}">
-        	<div class= "dropdown">
-        		<button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        			<span th:text="${session.sessionUser.userName}"></span>
-        		</button>
+            
+            </ul>
+        	<div th:if="${session.sessionUser == null}">
+        		<a class = "btn btn-primary" href="#" th:src="@{/login}">Sign In</a>
         	</div>
-        	<div class="dropdown-menu" aria-labelledby="userDropdown">
-        		<a class="dropdown-item" href="#" th:src="@{/userProfile}">Profile</a>
-        		<a class="dropdown-item" href="#" th:src="@{/wishlist}">Wishlist</a>
-        		<a class="dropdown-item" href="#" th:src="@{/applications}">Applications</a>
-        		<a th:if="${session.sessionUser.userType.toString() == 'ADMIN'}" class="dropdown-item" href="#" th:src="@{/admin}">Admin</a>
-        		<div class = "dropdown-divider"></div>
-        		<a class="dropdown-item" href="#" th:src="@{/logout}">Logout</a>
-        	</div>
-        </div>
+        	
+        	<div th:if="${session.sessionUser != null}">
+	        	<div class= "dropdown">
+	        		<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+	        			<span th:text="${session.sessionUser.userName}"></span>
+	        		</button>
+	        	
+	        	<ul class="dropdown-menu">
+	        		<li><a class="dropdown-item" href="#" th:src="@{/userProfile}">Profile</a></li>
+	        		<li><a class="dropdown-item" href="#" th:src="@{/wishlist}">Wishlist</a></li>
+	        		<li><a class="dropdown-item" href="#" th:src="@{/applications}">Applications</a></li>
+	        		<li><a th:if="${session.sessionUser.userType.toString() == 'ADMIN'}" class="dropdown-item" href="#" th:src="@{/admin}">Admin</a></li>
+	        		<li><hr class = "dropdown-divider"></hr>
+	        		<li><a class="dropdown-item" href="./logout">Logout</a></li>
+	        	</ul>
+	        	</div>
+       	 	</div>
+       	 
         
     </nav>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>

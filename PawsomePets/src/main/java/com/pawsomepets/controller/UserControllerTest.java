@@ -35,4 +35,10 @@ public class UserControllerTest {
 		return "ProfilePage";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login";
+	}
+	
 }

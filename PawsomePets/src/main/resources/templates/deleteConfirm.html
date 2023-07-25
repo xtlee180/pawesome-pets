@@ -5,6 +5,8 @@
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
     <link th:href="@{deleteConfirm.css}" rel="stylesheet" />
@@ -13,6 +15,7 @@
 
 <body>
     <div class="v16_1145">
+    <div th:replace="navbar:: navbar">
         <div class="v16_1146"></div><span class="v16_1147">Pawsome Pets</span>
         <div class="v16_1148"><span class="v16_1149">Home</span><span class="v16_1150">About Us</span><span
                 class="v16_1151">Contact Us</span><span class="v16_1152">Adopt me?</span></div><span
@@ -21,7 +24,7 @@
         <div class="v16_1155"></div>
 
         <div class="v16_1160"></div><span class="v16_1161">Admin</span>
-
+</div>
 
         <!--buttons-->
         <a class="v16_1183 buttonText" href="#">Add Animal</a>
@@ -41,6 +44,16 @@
         <a class="v16_1257 text" href="#">Cancel</a>
 
     </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
