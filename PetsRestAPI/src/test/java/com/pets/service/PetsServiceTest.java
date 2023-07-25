@@ -133,7 +133,7 @@ public class PetsServiceTest {
 
         when(petsDao.getPetsByStatus(AvailEnum.AVAILABLE)).thenReturn(expectedList);
 
-        List<Pet> retrievedList = petService.getAvailablePets();
+        List<Pet> retrievedList = petService.findPetsByAvailability(AvailEnum.AVAILABLE);
 
         verify(petsDao).getPetsByStatus(AvailEnum.AVAILABLE);
 
