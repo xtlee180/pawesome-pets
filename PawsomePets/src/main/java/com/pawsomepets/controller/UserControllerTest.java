@@ -68,4 +68,21 @@ public class UserControllerTest {
 		return "login";
 	}
 	
+	//delete account mapping
+	@GetMapping("/delete")
+	public String deleteUser(Model model, HttpSession session) {
+		User userDelete = (User) session.getAttribute("sessionUser");
+		String outcome = userService.deleteUser(userDelete.getUserID());
+		
+		if(outcome.equals("Deleted")) {
+			model.addAttribute("message", "Delete successful!");
+		}else {
+			model.addAttribute("message", "Something went wrong...");
+		}
+		
+		session.invalidate();
+		model.addAttribute("login", new Login());
+		return "login";
+	}
+	
 }
