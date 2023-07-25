@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/PetsRestAPI/PetsResAPI.iml" filepath="$PROJECT_DIR$/PetsRestAPI/PetsResAPI.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/di004-finalproject-group3.iml" filepath="$PROJECT_DIR$/.idea/di004-finalproject-group3.iml" />
     </modules>
   </component>

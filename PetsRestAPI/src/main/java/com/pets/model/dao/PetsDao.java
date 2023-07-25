@@ -4,38 +4,14 @@ import com.pets.dto.AvailEnum;
 import com.pets.dto.GenderEnum;
 import com.pets.dto.Pet;
 import com.pets.dto.SizeEnum;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.data.domain.Pageable;
 import java.util.List;
-
-/*
-+ searchByBreed(String breed): List<Pet>
-+ searchByType(String type): List<Pet>
-
-+ searchPetById(Int id): Pet object
-
-+ searchPetByGender(String gender): List<Pet>
-
-+ searchPetBySize(Enum size): List<Pet>
-
-+ searchPetByAgeRange(String range?)
-
-+ searchPetByAvailability(String avail): List<Pet>
-
-+ getAllPets(): List<Pet>
-
-+ getAllAvailablePets() = List<Pet>
-
-+ deletePetById(Int id): void idk
-
-+ updatePetAvailability: Pet
-
-+ updatePetDetails: Pet
- */
 
 @Repository
 public interface PetsDao extends JpaRepository<Pet, Integer> {
@@ -52,13 +28,18 @@ public interface PetsDao extends JpaRepository<Pet, Integer> {
     @Query("FROM Pet p WHERE p.size=:size")
     List<Pet> getPetsBySize(@Param("size")SizeEnum size);
 
+    //for any status
     @Query("FROM Pet p WHERE p.availability=:availability")
     List<Pet> getPetsByStatus(@Param("availability")AvailEnum availability);
+
+    //specifically for pagination = all available pets
+    @Query("FROM Pet p where p.availability=:availability")
+    Page<Pet> findAvailablePets(@Param("availability") AvailEnum availability, Pageable pageable);
 
     //only updates AVAILABILTIY
     @Modifying //use when performing data modification
     @Query("UPDATE Pet SET availability=:newAvail WHERE petID=:id")
-    void updatePetAvailability(int id, AvailEnum availability);
+    void updatePetAvailability(@Param("id") int id, @Param("newAvail") AvailEnum availability);
 
     //updates ALL other details except availability
     @Modifying

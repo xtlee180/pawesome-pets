@@ -4,6 +4,7 @@ import com.pets.dto.AvailEnum;
 import com.pets.dto.GenderEnum;
 import com.pets.dto.Pet;
 import com.pets.dto.SizeEnum;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ import java.util.List;
 
  */
 public interface PetService {
-    List<Pet> getAvailablePets();
+    Page<Pet> getAvailablePetsPaginated(AvailEnum availability, int page, int size);
     List<Pet> getAllPets();
     Pet findPetById(int petID);
     List<Pet> findPetsByType(String type);
