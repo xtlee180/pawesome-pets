@@ -24,7 +24,7 @@ public class ApplicationController {
 
 	// Add an application
 	@RequestMapping("/applicationInput")
-	public ModelAndView InputEmployeeDetailsPageController() {
+	public ModelAndView applicationInputController() {
 		ModelAndView modelAndView=new ModelAndView();
 		
 		modelAndView.addObject("app", new Application());
