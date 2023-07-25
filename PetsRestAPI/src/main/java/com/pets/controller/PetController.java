@@ -38,7 +38,7 @@ public class PetController {
 
     @GetMapping("/petsByAvailability")
     public String showPetsByAvailability(Model model, AvailEnum availability){
-        List<Pet> listOfPets = petService.getPetsByAvailability(availability);
+        List<Pet> listOfPets = petService.findPetsByAvailability(availability);
         model.addAttribute("errors", violations);
         model.addAttribute("availability", listOfPets);
         return "redirect:/petsMainPage"; //filter page to show by pets depending on availability

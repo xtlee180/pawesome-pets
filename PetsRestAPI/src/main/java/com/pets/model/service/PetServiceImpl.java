@@ -27,7 +27,7 @@ public class PetServiceImpl implements PetService {
     }
 
     //used if need to get pets by a certain availability e.g. adopted or inprogress
-    public List<Pet> getPetsByAvailability(AvailEnum availability){
+    public List<Pet> findPetsByAvailability(AvailEnum availability){
         return petsDao.getPetsByStatus(availability);
     }
 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pet Information</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{petsinfo.css}" />
+    <!--for the favourite icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div th:replace="navbar:: navbar">If this is showing, the navbar isn't working >:C</div>
+    <div class="container-lg" id="petPhoto">
+        <img th:src="${pet.image}" alt="Pet Photo">
+        <!--displaying information about pet-->
+        
+    </div>
+    <div id="nameBox">
+        <h2 th:text="${pet.petName}">Name</h2>
+    </div>
+    <div id="descriptionBox">
+        <p style="font-weight: 10px;">Description <span th:text="${pet.description}"></span></p>
+    </div>
+    <div id="keyInfoBox">
+        <p id="petBreedLabel">Breed<span th:text="${pet.breed}"></span></p>
+        <p id="ageLabel">Age <span th:text="${pet.age}"></span></p>
+        <p id="sizeLabel">Size <span th:text="${pet.size}"></span></p>
+        <p id="genderLabel">Gender <span th:text="${pet.gender}"></span></p>
+    </div>
+    <div id="buttonBox">
+        <p th:text=" 'Do you think you can give ' + ${pet.name} + ' a new home?'">Do you think you can give [petName] a new home?</p>
+        <!--buttons should prefill w/ pet id, name?? or just user fills it out themselves? idk maybe just pet id-->
+        <!--goes to contact us page w/ information on how to contact them-->
+        <button id="contactUsBtn" class="button" th:href="@{/contact}" th:text="'Enquire about ' +${pet.name}'">Enquire about [petname]</a>
+        <!--should lead to form & fill out to go to the application page but IDK HOW MAN-->
+        <button type="submit" class="button" th:value="${pet.petID}">Adopt me!</button>
+        <!--IS IT WISHLISTS FOR THE TEMPLATE IDK SOLVE IT LATER-->
+        <button class="button button-like" >
+            <i class="fa fa-heart"></i>
+            <span>Favourite</span>
+        </button>
+  
+    
+        <!-- query for the sake of the button-->
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script>
+            $(document).foundation();
+            $(function() {
+                $('.button-like')
+                .bind('click', function(event) {
+                    $(".button-like").toggleClass("liked");
+                })} 
+            );
+        </script>
+    </div>
+
+    <!-- Bootstrap scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
