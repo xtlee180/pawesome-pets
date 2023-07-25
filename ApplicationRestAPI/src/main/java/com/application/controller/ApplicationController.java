@@ -1,10 +1,15 @@
 package com.application.controller;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,9 +23,26 @@ public class ApplicationController {
 	private ApplicationService applicationService;
 
 	// Add an application
-	@PostMapping("/addApplication")
-	public ModelAndView saveApplicationController(Application application) {
+	@RequestMapping("/applicationInput")
+	public ModelAndView InputEmployeeDetailsPageController() {
+		ModelAndView modelAndView=new ModelAndView();
+		
+		modelAndView.addObject("app", new Application());
+	    modelAndView.setViewName("Application/ApplicationPage");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/addApplication")
+	public ModelAndView saveApplicationController(@Valid @ModelAttribute ("app")Application application,BindingResult results) {
 		ModelAndView modelAndView = new ModelAndView();
+		
+		if (results.hasErrors()) {
+			List<Application> applicationList = applicationService.getAllApplications();
+			modelAndView.addObject("applications", applicationList);
+	        modelAndView.addObject("app", application);
+	        modelAndView.setViewName("Application/ApplicationPage");
+	        return modelAndView;
+	    }
 		
 		String message = null;
 		if (applicationService.addApplication(application))
@@ -29,7 +51,7 @@ public class ApplicationController {
 			message = "An application couldn't be made at this time";
 
 		modelAndView.addObject("message", message);
-		modelAndView.setViewName("ApplicationConfirmationPage");
+		modelAndView.setViewName("Application/ApplicationConfirmationPage");
 
 		return modelAndView;
 	}
@@ -42,7 +64,7 @@ public class ApplicationController {
 		List<Application> applicationList = applicationService.getAllApplications();
 		modelAndView.addObject("applications", applicationList);
 		modelAndView.addObject("app", new Application());
-		modelAndView.setViewName("DisplayApplicationsPage");
+		modelAndView.setViewName("Application/DisplayApplicationsPage");
 		return modelAndView;
 	}
 
@@ -59,7 +81,7 @@ public class ApplicationController {
     public String editApplication(int applicationID, Model model) {
     	Application application = applicationService.getApplicationByID(applicationID);
         model.addAttribute("application", application);
-        return "ApplicationEditPage";
+        return "Application/ApplicationEditPage";
     }
 
 	@PostMapping("/editApplication")
@@ -75,7 +97,7 @@ public class ApplicationController {
 	 public String deleteApplication(int applicationID, Model model) {
         Application application = applicationService.getApplicationByID(applicationID);
         model.addAttribute("application", application);
-        return "ApplicationDeletePage";
+        return "Application/ApplicationDeletePage";
     }
 	
 	@PostMapping("/deleteApplication")
