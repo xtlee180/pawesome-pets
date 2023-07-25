@@ -3,7 +3,9 @@ package com.user.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.user.dto.Login;
 import com.user.dto.User;
+import com.user.dto.UserList;
 import com.user.service.UserService;
 
 @RestController
@@ -30,8 +33,8 @@ public class UserResource {
 	}
 	
 	@GetMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<User> getAllUsers(){
-		return userService.getAllUsers();
+	public UserList getAllUsers(){
+		return new UserList(userService.getAllUsers());
 	}
 	
 	@GetMapping(path = ("/users/{id}"), produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,8 +48,14 @@ public class UserResource {
 	}
 	
 	@PutMapping(path = "/users", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public User editUser(@RequestBody User user) {
-		return userService.editUser(user);
+	public ResponseEntity<User> editUser(@RequestBody User user) {
+		User userEdit = userService.editUser(user);
+		if (userEdit!=null) {
+			return new ResponseEntity<User>(userEdit, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 	
 	@DeleteMapping(path = "/users/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
@@ -55,13 +64,26 @@ public class UserResource {
 	}
 	
 	@PutMapping(path="/usersEditPN", produces = MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
-	public User editUnAndPw(@RequestBody User user) {
-		return userService.editNameAndPass(user.getUserID(), user.getUserName(), user.getUserPassword());
+	public ResponseEntity<User> editUnAndPw(@RequestBody User user) {
+		User userCred = userService.editNameAndPass(user.getUserID(), user.getUserName(), user.getUserPassword());
+		if(userCred!=null) {
+			return new ResponseEntity<User>(userCred, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+		}
+	
 	}
 	
 	@PutMapping(path="/usersEditUT", produces = MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
-	public User editUserType(@RequestBody User user) {
-		return userService.editUserType(user.getUserID(), user.getUserType().toString());
+	public ResponseEntity<User> editUserType(@RequestBody User user) {
+		User userType = userService.editUserType(user.getUserID(), user.getUserType().toString());
+		
+		if(userType!=null) {
+			return new ResponseEntity<User>(userType, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+		}
+	
 	}
 
 

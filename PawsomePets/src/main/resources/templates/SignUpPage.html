@@ -41,14 +41,14 @@
         <span class="v16_111">Sign Up</span>
 
         <!--input here so form-->
-        <form>
-            <input type="text" class="v16_114 infoText" placeholder="First Name"></input>
-            <input class="v16_136 infoText" type="text" placeholder="Last Name"></input>
-            <input class="v16_137 infoText" type="text" placeholder="Email Address"></input>
-            <input class="v16_138 infoText" type="text" placeholder="Phone Number"></input>
-            <input class="v16_139 infoText" type="text" placeholder="UserName"></input>
-            <input class="v16_140 infoText" type="text" placeholder="Password"></input> 
-            <input class="v16_141 infoText" type="text" placeholder="Confirm Password"></input>
+        <form action="#" th:action="@{/addUser}" th:object="${newUser}" method="post">
+            <input type="text" class="v16_114 infoText" placeholder="First Name" th:field="*{firstName}"></input>
+            <input class="v16_136 infoText" type="text" placeholder="Last Name" th:field="*{lastName}"></input>
+            <input class="v16_137 infoText" type="text" placeholder="Email Address" th:field="*{email}"></input>
+            <input class="v16_138 infoText" type="text" placeholder="Phone Number" th:field="*{phoneNumber}"></input>
+            <input class="v16_139 infoText" type="text" placeholder="UserName" th:field="*{userName}"></input>
+            <input class="v16_140 infoText" type="text" placeholder="Password" th:field="*{userPassword}"></input> 
+            <input class="v16_141 infoText" type="text" placeholder="Confirm Password" th:field="*{confirmPassword}"></input>
             <!--form button-->
             <button class="v16_296 infoText" type="submit">Create</button>
             <!-- <span class="v16_462">Create</span> -->

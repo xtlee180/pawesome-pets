@@ -12,8 +12,9 @@
 <!--add to html files to reuse html code-->
 <!--<div th:replace="navbar:: header"></div>-->
 <!--<div th:replace="navbar:: navbar"></div>-->
-<div class="container-fluid">
-    <nav th:fragment="navbar" class="navbar col-md-6 col-12 text-center">
+
+<div class="container-fluid" th:fragment="navbar">
+    <nav class="navbar col-md-6 col-12 text-center">
         <!-- need to add logo on far left-->
         <div class="logo-container">
             <img class="paw1" src="./images/paw.png" alt="paw">
@@ -36,7 +37,7 @@
             
             </ul>
         	<div th:if="${session.sessionUser == null}">
-        		<a class = "btn btn-primary" href="#" th:src="@{/login}">Sign In</a>
+        		<a class = "btn btn-primary" href="./login">Sign In</a>
         	</div>
         	
         	<div th:if="${session.sessionUser != null}">
