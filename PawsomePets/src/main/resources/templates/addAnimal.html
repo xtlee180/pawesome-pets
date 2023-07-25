@@ -48,16 +48,27 @@
         <!--cream box-->
         <div class="v16_1006"></div>
         
-        <form>
-            <input class="v16_1260 infoText" type="text" placeholder="Name"></input>
-            <input class="v16_1265 infoText" type="text" placeholder="Description"></input>
-            <input class="v16_1261 infoText" type="text" placeholder="Age"></input>
-            <input class="v16_1293 infoText" type="text" placeholder="Breed"></input>
-            <input class="v16_1351 infoText" type="text" placeholder="Size"></input>
+        <form action="#" th:action="@{/addAnimal}" th:object="${addAnimal}" method="post">
+        	<input type="hidden" th:field="*{petID}"> </input>
+            <input class="v16_1260 infoText" type="text" placeholder="Name" th:field="*{petName}"></input>
+            <input class="v16_1265 infoText" type="text" placeholder="Description" th:field="*{description}"></input>
+            <input class="v16_1261 infoText" type="text" placeholder="Age" th:field="*{age}"></input>
+            <input class="v16_1293 infoText" type="text" placeholder="Breed" th:field="*{breed}"></input>
+            
+            <select class="v16_1351 infoText" th:field="*{size}">
+            	<option th:each="size: ${sizeList}" th:value="${size}" th:text=${size}></option>
+            </select>
+            
+            <!-- may need to do a bit of editing with this to get the image stuff to work -->
             <input class="v16_1642 upload" type="file"></input>
-            <input class="v16_1464 infoText" type="text" placeholder="Availability"></input>
-            <input class="v16_1294 infoText" type="text" placeholder="Type"></input>
-            <input class="v16_1263 infoText" type="text" placeholder="Gender"></input>
+            <select class="v16_1464 infoText" th:field="*{availability}">
+            	<option th:each="ava: ${avaList}" th:value="${ava}" th:text=${ava}></option>
+            </select>
+            <input class="v16_1294 infoText" type="text" placeholder="Type" th:field="*{type}"></input>
+            
+            <select class="v16_1263 infoText" th:field="*{gender}">
+            	<option th:each="gender: ${genderList}" th:value="${gender}" th:text=${gender}></option>
+            </select>
 
             <!--add button-->
             <button class="v16_1644 infoText" type="submit"> Add</button>

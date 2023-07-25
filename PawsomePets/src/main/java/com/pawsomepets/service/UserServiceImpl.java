@@ -160,4 +160,12 @@ public class UserServiceImpl implements UserService {
 		return userList;
 	}
 
+	@Override
+	public List<String> getAllUserNames() {
+		// /users/{id}
+		
+		List<String> names = restTemplate.getForObject("http://localhost:8084/usersNames",List.class);
+		return names;
+	}
+
 }

@@ -31,26 +31,38 @@
 </div>
 
         <!--buttons-->
-        <a class="v16_1138 buttonText" href="#">Add Animal</a>
-        <a class="v16_1139 buttonText" href="#">Delete Animal</a>
-        <a class="v16_1140 buttonText" href="#">Edit Animal</a>
+        <a class="v16_1138 buttonText" href="./addAnimalInput">Add Animal</a>
+        <a class="v16_1139 buttonText" href="./deleteAnimalInput">Delete Animal</a>
+        <a class="v16_1140 buttonText" href="./editAnimalInput">Edit Animal</a>
 
 
         <!--edit box background-->
         <div class="v16_1646"></div>
         <div class="v16_1651"></div>
 
-    <form>
-            <input class="v16_1652 placeText" placeholder="Sammy">1</input>
-            <input class="v16_1653 placeText" placeholder="Adorable fun loving...">2</input>
-            <input class="v16_1654 placeText" placeholder="5">3</input>
-            <input class="v16_1655 placeText" placeholder="Medium">4</input>
-            <input class="v16_1656 placeText" placeholder="Lab">5</input>
-            <input class="v16_1657 placeText" placeholder="Image">6</input>
-            <input class="v16_1658 placeText" placeholder="Reserved">7</input>
-            <input class="v16_1659 placeText" placeholder="Dog">8</input>
-            <input class="v16_1660 placeText" placeholder="F">9</input>
-
+    <form action="#" th:action="@{/editAnimalNow}" th:object="${editAnimal}" method="post">
+   			<input type="hidden" th:field="*{petID}">
+            <input class="v16_1652 placeText" th:field="*{petName}">
+            <input class="v16_1653 placeText" th:field="*{description}">
+            <input class="v16_1654 placeText" th:field="*{age}">
+            
+            <select class="v16_1655 placeText" th:field="*{size}">
+            	<option th:each="size: ${sizeList}" th:value="${size}" th:text=${size}></option>
+            </select>
+            <input class="v16_1656 placeText" th:field="*{type}">
+            <input class="v16_1657 placeText" th:field="*{image?}">
+            
+            <select class="v16_1658 placeText" th:field="*{availability}">
+            	<option th:each="ava: ${avaList}" th:value="${ava}" th:text=${ava}></option>
+            </select>
+            <input class="v16_1659 placeText" th:field="*{breed}">
+   
+			<select class="v16_1660 placeText" th:field="*{gender}">
+            	<option th:each="gender: ${genderList}" th:value="${gender}" th:text=${gender}></option>
+            </select>
+			
+			
+			
             <button class="v16_1670 editText" type="submit">Edit</button>
 
         </form>

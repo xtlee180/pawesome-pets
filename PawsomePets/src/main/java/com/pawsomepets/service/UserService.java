@@ -14,4 +14,5 @@ public interface UserService {
 	public User editUserType(User user);
 	public String deleteUser(int userID);
 	public List<User> getAllUsers();
+	public List<String> getAllUserNames();
 }

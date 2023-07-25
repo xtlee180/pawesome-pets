@@ -85,6 +85,11 @@ public class UserResource {
 		}
 	
 	}
+	
+	@GetMapping(path = "/usersNames")
+	public List<String> getAllUserNames(){
+		return userService.getAllUserNames();
+	}
 
 
 }

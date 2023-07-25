@@ -1,5 +1,7 @@
 package com.pawsomepets.dto;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +14,10 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.pawsomepets.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,31 +36,43 @@ public class User {
 	@NotBlank(message = "Username is required and must be unique")
 	@Column(unique = true)
 	private String userName;
-	@NotBlank
+	
+	@NotBlank(message="Password must not be blank!")
 	private String userPassword;
 	
 	@Enumerated(EnumType.STRING)
 	private UserType userType;
 	
-	@NotBlank
+	@NotBlank(message = "please just fill in the form")
 	private String firstName;
-	@NotBlank
+	
+	@NotBlank(message = "missed something!")
 	private String lastName;
 	
 	@NotBlank(message = "email is required and must be unique")
 	@Column(unique = true)
 	private String email;
-	@NotBlank
+	
+	@NotBlank(message = "ring ring...")
 	private String phoneNumber;
 	
-	@NotBlank
+//	@NotBlank(message = "might be helpful")
 	@Transient
 	private String confirmPassword;
+	
+	
 	
 	@AssertTrue(message = "Passwords must match")
 	private boolean isPasswordValid() {
 		return userPassword !=null && userPassword.equals(confirmPassword);
 	}
+	
+
+	
+	
+	@Transient
+	@Autowired
+	private UserService service;
 	
 	public User(String userName, String password, UserType userType, String firstName, String lastName, String email,
 			String phoneNumber) {

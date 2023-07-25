@@ -39,6 +39,9 @@
 
         <div class="v16_109"></div>
         <span class="v16_111">Sign Up</span>
+        <div th:if="${!errors.isEmpty()}"><p class="alert alert-danger" th:each="error : ${errors}"
+               th:text="${error.message}"></p></div>
+        <h3 th:text="${message}"></h3>
 
         <!--input here so form-->
         <form action="#" th:action="@{/addUser}" th:object="${newUser}" method="post">

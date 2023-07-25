@@ -51,7 +51,7 @@
 	        		<li><a class="dropdown-item" href="#" th:src="@{/userProfile}">Profile</a></li>
 	        		<li><a class="dropdown-item" href="#" th:src="@{/wishlist}">Wishlist</a></li>
 	        		<li><a class="dropdown-item" href="#" th:src="@{/applications}">Applications</a></li>
-	        		<li><a th:if="${session.sessionUser.userType.toString() == 'ADMIN'}" class="dropdown-item" href="#" th:src="@{/admin}">Admin</a></li>
+	        		<li><a th:if="${session.sessionUser.userType.toString() == 'ADMIN'}" class="dropdown-item" href="./admin">Admin</a></li>
 	        		<li><hr class = "dropdown-divider"></hr>
 	        		<li><a class="dropdown-item" href="./logout">Logout</a></li>
 	        	</ul>

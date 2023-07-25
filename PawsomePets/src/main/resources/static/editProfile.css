@@ -1,0 +1,199 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-size: 14px;
+  background: rgba(249,243,221,1);
+}
+.v106_13 {
+  width: 100%;
+  height: 1024px;
+  opacity: 1;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+.v106_14 {
+  width: 880px;
+  height: 740px;
+  background: rgba(255,171,93,1);
+  opacity: 1;
+  position: absolute;
+  top: 230px;
+  left: 342px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow: hidden;
+}
+.v106_28 {
+  width: 880px;
+  height: 740px;
+  background: rgba(195,231,220,1);
+  opacity: 1;
+  position: absolute;
+  top: 206px;
+  left: 305px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow: hidden;
+}
+.v106_30 {
+  width: 292px;
+  height: 67px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  top: 360px;
+  left: 720px;
+  overflow: hidden;
+}
+.v106_32 {
+  width: 292px;
+  height: 67px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  top: 480px;
+  left: 720px;
+  overflow: hidden;
+}
+.v106_34 {
+  width: 292px;
+  height: 67px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  top: 600px;
+  left: 720px;
+}
+.v106_36 {
+  width: 292px;
+  height: 67px;
+  background: rgba(255,255,255,1);
+  opacity: 1;
+  position: absolute;
+  top: 720px;
+  left: 720px;
+  overflow: hidden;
+}
+.v106_58 {
+  width: 197px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 259px;
+  left: 622px;
+  font-family: Lato;
+  font-weight: Bold;
+  font-size: 40px;
+  opacity: 1;
+  text-align: left;
+}
+.v106_59 {
+  width: 198px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 369px;
+  left: 456px;
+  font-family: Lato;
+  font-weight: Bold;
+  font-size: 40px;
+  opacity: 1;
+  text-align: left;
+}
+.v106_61 {
+  width: 192px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 488px;
+  left: 456px;
+  font-family: Lato;
+  font-weight: Bold;
+  font-size: 40px;
+  opacity: 1;
+  text-align: left;
+}
+.v106_62 {
+  width: 117px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 607px;
+  left: 456px;
+  font-family: Lato;
+  font-weight: Bold;
+  font-size: 40px;
+  opacity: 1;
+  text-align: left;
+}
+.v106_63 {
+  width: 207px;
+  color: rgba(0,0,0,1);
+  position: absolute;
+  top: 729px;
+  left: 456px;
+  font-family: Lato;
+  font-weight: Bold;
+  font-size: 40px;
+  opacity: 1;
+  text-align: left;
+}
+.v106_64 {
+  width: 124px;
+  height: 42px;
+  background: rgba(255,171,93,1);
+  opacity: 1;
+  position: absolute;
+  top: 863px;
+  left: 888px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  overflow: hidden;
+}
+.v106_65 {
+  width: 124px;
+  height: 42px;
+  background: rgba(255,171,93,1);
+  opacity: 1;
+  position: absolute;
+  top: 863px;
+  left: 720px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  overflow: hidden;
+}
+.buttonText {
+  color: rgba(0,0,0,1);
+  font-family: Lato;
+  font-weight: Bold;
+  font-size: 24px;
+  opacity: 1;
+  text-align: center;
+}
+
+.cancelButton{
+  padding-top: 5px;
+}
+
+input{
+  color: rgba(0,0,0,1);
+  border: none;
+  font-family: Lato;
+  font-size: 36px;
+  opacity: 1;
+}
+
+button{
+  border: none;
+}
+
+a{
+  text-decoration: none;
+}
